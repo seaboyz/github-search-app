@@ -1,28 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-  
-  <title>Frontend Mentor | GitHub user search app</title>
-</head>
-<body>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/favicon-32x32.png"
+		/>
 
-  devfinder
+		<title>GitHub user search app</title>
 
-  Light
-  Dark
+		<!-- fontawesome  -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+	</head>
+	<body>
+		<header>
+			<div class="logo"></div>
+			<div class="theme"></div>
+		</header>
+		<main>
+			<form>
+				<input type="search" name="" id="" />
+			</form>
+			<div class="card user-info">
+				<div class="card__header">
+					<div class="avatar">
+						<img
+							src="https://avatars.githubusercontent.com/u/583231?v=4"
+							alt="avatar"
+						/>
+					</div>
+					<div class="profile">
+						<h2 class="name">The Octocat</h2>
+						<a href="https://github.com/octocat">@octocat</a>
+						<p class="bio">
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto,
+							laudantium tempora? Deserunt dicta modi ratione delectus
+							praesentium, adipisci.
+						</p>
+					</div>
+				</div>
 
-  Search GitHub username...
-  Search
+				<div class="card__body">
+					<p class="bio">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+						nisi corrupti quia officia hic, quis aliquam harum sapiente dolorum
+						facilis?
+					</p>
+					<div class="stats">
+						<div class="repos">
+							<h3>Repos</h3>
+							<p>8</p>
+						</div>
+						<div class="Followers">
+							<h3>Followers</h3>
+							<p>3938</p>
+						</div>
+						<div class="following">
+							<h3>Following</h3>
+							<p>9</p>
+						</div>
+					</div>
+				</div>
 
-  Joined
-
-  Repos
-  Followers
-  Following
-
-</body>
+				<div class="card__footer">
+					<div class="location">
+						<i class="fas fa-map-marker-alt"></i>
+						<a href="">San Francisco</a>
+					</div>
+					<div class="github">
+						<i class="fas fa-link"></i>
+						<a href="">https://github.blog</a>
+					</div>
+					<div class="twitter">
+						<i class="fab fa-twitter"></i>
+						<a href=""></a>
+					</div>
+					<div class="compony">
+						<i class="far fa-building"></i>
+						<a href="">@github</a>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
 </html>

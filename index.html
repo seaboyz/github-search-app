@@ -2,7 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1"
+		/>
 
 		<link
 			rel="icon"
@@ -45,6 +48,7 @@
 						placeholder="Search GitHub username"
 						required
 					/>
+					<span class="error-message">No results</span>
 					<button class="btn">Search</button>
 				</form>
 				<div class="card">
@@ -56,10 +60,10 @@
 							/>
 						</div>
 
-						<h2 class="name">The Octocat</h2>
-						<a class="github-address" href="https://github.com/octocat"
-							>@octocat</a
+						<a target="_blank" href="https://github.com/octocat" class="name"
+							>The Octocat</a
 						>
+						<a target="_blank" class="email isDisabled">@octocat</a>
 						<p class="join-date">Joined 25 Jan 2011</p>
 
 						<p class="bio">
@@ -73,15 +77,15 @@
 						<div class="stats">
 							<div class="repos">
 								<h3>Repos</h3>
-								<p>8</p>
+								<a target="_blank">8</a>
 							</div>
-							<div class="Followers">
+							<div class="followers">
 								<h3>Followers</h3>
-								<p>3938</p>
+								<a target="_blank">3938</a>
 							</div>
 							<div class="following">
 								<h3>Following</h3>
-								<p>9</p>
+								<a target="_blank">9</a>
 							</div>
 						</div>
 					</div>
@@ -89,19 +93,19 @@
 					<div class="card__footer">
 						<div class="location">
 							<i class="fas fa-map-marker-alt"></i>
-							<a href="">San Francisco</a>
+							<a>San Francisco</a>
 						</div>
-						<div class="github">
+						<div class="blog">
 							<i class="fas fa-link"></i>
-							<a href="">https://github.blog</a>
+							<a target="_blank" href="">https://github.blog</a>
 						</div>
 						<div class="twitter">
 							<i class="fab fa-twitter"></i>
-							<a class="isDisabled">Not available</a>
+							<a target="_blank" class="isDisabled">Not available</a>
 						</div>
-						<div class="compony">
+						<div class="company">
 							<i class="far fa-building"></i>
-							<a href="">@github</a>
+							<a>@github</a>
 						</div>
 					</div>
 				</div>

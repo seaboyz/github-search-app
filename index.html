@@ -20,76 +20,92 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		/>
+
+		<!-- css -->
+		<link rel="stylesheet" href="style.css" />
+
+		<!-- script -->
+		<script src="script.js" defer></script>
 	</head>
 	<body>
-		<header>
-			<div class="logo"></div>
-			<div class="theme"></div>
-		</header>
-		<main>
-			<form>
-				<input type="search" name="" id="" />
-			</form>
-			<div class="card user-info">
-				<div class="card__header">
-					<div class="avatar">
-						<img
-							src="https://avatars.githubusercontent.com/u/583231?v=4"
-							alt="avatar"
-						/>
-					</div>
-					<div class="profile">
+		<div class="container">
+			<header class="header">
+				<h1 class="logo text-primary fs-900">devfinder</h1>
+				<span class="theme"
+					>dark <img src="./assets/icon-moon.svg" alt="moon"
+				/></span>
+			</header>
+			<main>
+				<form class="search-bar">
+					<img src="./assets/icon-search.svg" alt="search-icon" />
+					<input
+						type="text"
+						name=""
+						id=""
+						placeholder="Search GitHub username"
+						required
+					/>
+					<button class="btn">Search</button>
+				</form>
+				<div class="card">
+					<div class="card__header">
+						<div class="avatar">
+							<img
+								src="https://avatars.githubusercontent.com/u/583231?v=4"
+								alt="avatar"
+							/>
+						</div>
+
 						<h2 class="name">The Octocat</h2>
-						<a href="https://github.com/octocat">@octocat</a>
+						<a class="github-address" href="https://github.com/octocat"
+							>@octocat</a
+						>
+						<p class="join-date">Joined 25 Jan 2011</p>
+
 						<p class="bio">
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto,
-							laudantium tempora? Deserunt dicta modi ratione delectus
-							praesentium, adipisci.
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+							nisi corrupti quia officia hic, quis aliquam harum sapiente
+							dolorum facilis?
 						</p>
 					</div>
-				</div>
 
-				<div class="card__body">
-					<p class="bio">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-						nisi corrupti quia officia hic, quis aliquam harum sapiente dolorum
-						facilis?
-					</p>
-					<div class="stats">
-						<div class="repos">
-							<h3>Repos</h3>
-							<p>8</p>
-						</div>
-						<div class="Followers">
-							<h3>Followers</h3>
-							<p>3938</p>
-						</div>
-						<div class="following">
-							<h3>Following</h3>
-							<p>9</p>
+					<div class="card__body">
+						<div class="stats">
+							<div class="repos">
+								<h3>Repos</h3>
+								<p>8</p>
+							</div>
+							<div class="Followers">
+								<h3>Followers</h3>
+								<p>3938</p>
+							</div>
+							<div class="following">
+								<h3>Following</h3>
+								<p>9</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="card__footer">
-					<div class="location">
-						<i class="fas fa-map-marker-alt"></i>
-						<a href="">San Francisco</a>
-					</div>
-					<div class="github">
-						<i class="fas fa-link"></i>
-						<a href="">https://github.blog</a>
-					</div>
-					<div class="twitter">
-						<i class="fab fa-twitter"></i>
-						<a href=""></a>
-					</div>
-					<div class="compony">
-						<i class="far fa-building"></i>
-						<a href="">@github</a>
+					<div class="card__footer">
+						<div class="location">
+							<i class="fas fa-map-marker-alt"></i>
+							<a href="">San Francisco</a>
+						</div>
+						<div class="github">
+							<i class="fas fa-link"></i>
+							<a href="">https://github.blog</a>
+						</div>
+						<div class="twitter">
+							<i class="fab fa-twitter"></i>
+							<a class="isDisabled">Not available</a>
+						</div>
+						<div class="compony">
+							<i class="far fa-building"></i>
+							<a href="">@github</a>
+						</div>
 					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</div>
 	</body>
 </html>

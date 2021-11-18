@@ -48,130 +48,56 @@ theme.addEventListener('click', function () {
 });
 // fetch data from api
 var apiURL = 'https://api.github.com/users/';
-var NOTAVAILABLE = 'Not Avaivable';
 var input = document.querySelector('input');
 var form = document.querySelector('form');
 var card = document.querySelector('.card');
-var nameElement = document.querySelector('.name');
-var avitarElement = document.querySelector('.avatar img');
-var emailElement = document.querySelector('.email');
-var joinDateElement = document.querySelector('.join-date');
 var errorMessage = document.querySelector('.error-message');
-var bioElement = document.querySelector('.bio');
-var reposElement = document.querySelector('.repos a');
-var followersElement = document.querySelector('.followers a');
-var followingElement = document.querySelector('.following a');
-var locationElement = document.querySelector('.location a');
-var blogElement = document.querySelector('.blog a');
-var twitterElement = document.querySelector('.twitter a');
-var companyElement = document.querySelector('.company a');
+function getUserInfo(userName) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch(apiURL + userName)];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
 form === null || form === void 0 ? void 0 : form.addEventListener('submit', function (event) { return __awaiter(void 0, void 0, void 0, function () {
-    var userName, response, data, name, email, avatar_url, created_at, bio, followers, following, public_repos, location, blog, twitter_username, company, login;
+    var userName, userInfo, name_1, email, avatar_url, created_at, bio, followers, following, public_repos, location_1, blog, twitter_username, company, login, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 event.preventDefault();
                 userName = input.value;
-                if (userName === '')
-                    return [2 /*return*/];
-                return [4 /*yield*/, fetch(apiURL + userName)];
+                // clear input
+                input.value = '';
+                _a.label = 1;
             case 1:
-                response = _a.sent();
-                if (!response.ok) {
-                    errorMessage.style.display = 'initial';
-                    input.addEventListener('focus', function () {
-                        errorMessage.style.display = 'none';
-                    });
-                    return [2 /*return*/];
-                }
-                return [4 /*yield*/, response.json()];
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, getUserInfo(userName)];
             case 2:
-                data = _a.sent();
-                name = data.name, email = data.email, avatar_url = data.avatar_url, created_at = data.created_at, bio = data.bio, followers = data.followers, following = data.following, public_repos = data.public_repos, location = data.location, blog = data.blog, twitter_username = data.twitter_username, company = data.company, login = data.login;
-                // update name element
-                if (name) {
-                    nameElement.textContent = name;
-                    nameElement.classList.remove('isDisabled');
-                }
-                else {
-                    nameElement.textContent = login;
-                    nameElement.classList.remove('isDisabled');
-                }
-                nameElement.href = "https://github.com/" + login;
-                // update avitar
-                avitarElement.src = avatar_url;
-                // update email
-                if (email) {
-                    emailElement.classList.remove('isDisabled');
-                    emailElement.textContent = email;
-                    emailElement.href = email;
-                }
-                else {
-                    emailElement.textContent = "@" + NOTAVAILABLE;
-                    emailElement.classList.add('isDisabled');
-                }
-                // update join date
-                joinDateElement.textContent = "Joined " + new Date(created_at)
+                userInfo = _a.sent();
+                name_1 = userInfo.name, email = userInfo.email, avatar_url = userInfo.avatar_url, created_at = userInfo.created_at, bio = userInfo.bio, followers = userInfo.followers, following = userInfo.following, public_repos = userInfo.public_repos, location_1 = userInfo.location, blog = userInfo.blog, twitter_username = userInfo.twitter_username, company = userInfo.company, login = userInfo.login;
+                card.innerHTML = "\n\t\t\t\t\t<div class=\"card__header\">\n\t\t\t\t\t\t<div class=\"avatar\">\n\t\t\t\t\t\t\t<img\n\t\t\t\t\t\t\t\tsrc=\"" + avatar_url + "\n\t\t\t\t\t\t\t\talt=\"avatar\"\n\t\t\t\t\t\t\t/>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<a target=\"_blank\" href=\"https://github.com/" + login + "\" class=\"name\"\n\t\t\t\t\t\t\t>" + (name_1 ? name_1 : login) + "</a\n\t\t\t\t\t\t>\n\t\t\t\t\t\t<a target=\"_blank\" class=\"email " + (email ? '' : 'isDisabled') + "\">" + (email || 'Not available') + "</a>\n\t\t\t\t\t\t<p class=\"join-date\">Joined " + new Date(created_at)
                     .toLocaleDateString('en-US', {
                     day: 'numeric',
                     month: 'short',
                     year: 'numeric',
                 })
-                    .replace(',', '') + "\n\t\t";
-                //update bio
-                if (bio) {
-                    bioElement.textContent = bio;
-                    nameElement.classList.remove('isDisabled');
-                }
-                else {
-                    bioElement.textContent = NOTAVAILABLE;
-                    bioElement.classList.add('isDisabled');
-                }
-                // update Stats
-                reposElement.textContent = "" + public_repos;
-                reposElement.href = "https://github.com/" + login + "?tab=repositories";
-                followersElement.textContent = "" + followers;
-                followersElement.href = "https://github.com/" + login + "?tab=followers";
-                followingElement.textContent = "" + following;
-                followingElement.href = "https://github.com/" + login + "?tab=followings";
-                // update location
-                if (location) {
-                    locationElement.textContent = location;
-                    locationElement.classList.remove('isDisabled');
-                }
-                else {
-                    locationElement.textContent = NOTAVAILABLE;
-                    locationElement.classList.add('isDisabled');
-                }
-                if (blog) {
-                    blogElement.textContent = blog;
-                    blogElement.href = blog;
-                    blogElement.classList.remove('isDisabled');
-                }
-                else {
-                    blogElement.textContent = NOTAVAILABLE;
-                    blogElement.classList.add('isDisabled');
-                }
-                if (twitter_username) {
-                    twitterElement.textContent = twitter_username;
-                    twitterElement.classList.remove('isDisabled');
-                    twitterElement.href = "https://twitter.com/" + twitter_username;
-                }
-                else {
-                    twitterElement.textContent = NOTAVAILABLE;
-                    twitterElement.classList.add('isDisabled');
-                }
-                if (company) {
-                    companyElement.textContent = company;
-                    companyElement.classList.remove('isDisabled');
-                }
-                else {
-                    companyElement.textContent = NOTAVAILABLE;
-                    companyElement.classList.add('isDisabled');
-                }
-                // clear input
-                input.value = '';
+                    .replace(',', '') + "</p>\n\n\t\t\t\t\t\t<p class=\"bio " + (bio ? '' : 'isDisabled') + "\">\n\t\t\t\t\t\t\t" + (bio || 'Not available') + "\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__body\">\n\t\t\t\t\t\t<div class=\"stats\">\n\t\t\t\t\t\t\t<div class=\"repos\">\n\t\t\t\t\t\t\t\t<h3>Repos</h3>\n\t\t\t\t\t\t\t\t<a href=\"https://github.com/" + login + "?tab=repositories\" target=\"_blank\">" + public_repos + "</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"followers\">\n\t\t\t\t\t\t\t\t<h3>Followers</h3>\n\t\t\t\t\t\t\t\t<a href=\"https://github.com/" + login + "?tab=followers\" target=\"_blank\">" + followers + "</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"following\">\n\t\t\t\t\t\t\t\t<h3>Following</h3>\n\t\t\t\t\t\t\t\t<a href=\"https://github.com/" + login + "?tab=followings\" target=\"_blank\">" + following + "</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"card__footer\">\n\t\t\t\t\t\t<div class=\"location\">\n\t\t\t\t\t\t\t<i class=\"fas fa-map-marker-alt\"></i>\n\t\t\t\t\t\t\t<a class=\"" + (location_1 ? '' : 'isDisabled') + "\" >" + (location_1 || 'Not available') + "</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"blog " + (blog ? '' : 'isDisabled') + "\">\n\t\t\t\t\t\t\t<i class=\"fas fa-link\"></i>\n\t\t\t\t\t\t\t<a target=\"_blank\"  href=\"" + (blog || '') + "\">" + (blog || 'Not available') + "</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"twitter " + (twitter_username ? '' : 'isDisabled') + "\">\n\t\t\t\t\t\t\t<i class=\"fab fa-twitter\"></i>\n\t\t\t\t\t\t\t<a href=\"https://twitter.com/" + twitter_username + "\" target=\"_blank\" class=\"isDisabled\">" + (twitter_username || 'Not available') + "</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"company " + (company ? '' : 'isDisabled') + "\"\">\n\t\t\t\t\t\t\t<i class=\"far fa-building\"></i>\n\t\t\t\t\t\t\t<a>" + (company || 'Not available') + "</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t";
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _a.sent();
+                errorMessage.style.display = 'initial';
+                input.addEventListener('focus', function () {
+                    errorMessage.style.display = 'none';
+                });
                 return [2 /*return*/];
+            case 4: return [2 /*return*/];
         }
     });
 }); });

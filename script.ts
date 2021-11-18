@@ -63,118 +63,121 @@ const companyElement = document.querySelector(
 	'.company a'
 ) as HTMLAnchorElement;
 
+async function getUserInfo(userName: string): Promise<UserInfo> {
+	const response = await fetch(apiURL + userName);
+	return await response.json();
+}
+
 form?.addEventListener('submit', async (event: Event) => {
 	event.preventDefault();
 	const userName = input.value;
 	if (userName === '') return;
 
-	const response = await fetch(apiURL + userName);
+	try {
+		const userInfo = await getUserInfo(userName);
 
-	if (!response.ok) {
+		const {
+			name,
+			email,
+			avatar_url,
+			created_at,
+			bio,
+			followers,
+			following,
+			public_repos,
+			location,
+			blog,
+			twitter_username,
+			company,
+			login,
+		} = userInfo;
+
+		// update name element
+		if (name) {
+			nameElement!.textContent = name;
+			nameElement!.classList.remove('isDisabled');
+		} else {
+			nameElement!.textContent = login;
+			nameElement!.classList.remove('isDisabled');
+		}
+		nameElement.href = `https://github.com/${login}`;
+		// update avitar
+		avitarElement.src = avatar_url;
+		// update email
+		if (email) {
+			emailElement.classList.remove('isDisabled');
+			emailElement.textContent = email;
+			emailElement.href = email;
+		} else {
+			emailElement.textContent = `@${NOTAVAILABLE}`;
+			emailElement.classList.add('isDisabled');
+		}
+		// update join date
+		joinDateElement.textContent = `Joined ${new Date(created_at)
+			.toLocaleDateString('en-US', {
+				day: 'numeric',
+				month: 'short',
+				year: 'numeric',
+			})
+			.replace(',', '')}
+			`;
+
+		//update bio
+		if (bio) {
+			bioElement.textContent = bio;
+			nameElement!.classList.remove('isDisabled');
+		} else {
+			bioElement.textContent = NOTAVAILABLE;
+			bioElement.classList.add('isDisabled');
+		}
+
+		// update Stats
+		reposElement.textContent = `${public_repos}`;
+		reposElement.href = `https://github.com/${login}?tab=repositories`;
+		followersElement.textContent = `${followers}`;
+		followersElement.href = `https://github.com/${login}?tab=followers`;
+		followingElement.textContent = `${following}`;
+		followingElement.href = `https://github.com/${login}?tab=followings`;
+
+		// update location
+		if (location) {
+			locationElement.textContent = location;
+			locationElement.classList.remove('isDisabled');
+		} else {
+			locationElement.textContent = NOTAVAILABLE;
+			locationElement.classList.add('isDisabled');
+		}
+		if (blog) {
+			blogElement.textContent = blog;
+			blogElement.href = blog;
+			blogElement.classList.remove('isDisabled');
+		} else {
+			blogElement.textContent = NOTAVAILABLE;
+			blogElement.classList.add('isDisabled');
+		}
+		if (twitter_username) {
+			twitterElement.textContent = twitter_username;
+			twitterElement.classList.remove('isDisabled');
+			twitterElement.href = `https://twitter.com/${twitter_username}`;
+		} else {
+			twitterElement.textContent = NOTAVAILABLE;
+			twitterElement.classList.add('isDisabled');
+		}
+		if (company) {
+			companyElement.textContent = company;
+			companyElement.classList.remove('isDisabled');
+		} else {
+			companyElement.textContent = NOTAVAILABLE;
+			companyElement.classList.add('isDisabled');
+		}
+
+		// clear input
+		input.value = '';
+	} catch (error) {
 		errorMessage.style.display = 'initial';
 		input.addEventListener('focus', () => {
 			errorMessage.style.display = 'none';
 		});
 		return;
 	}
-
-	const data: UserInfo = await response.json();
-
-	const {
-		name,
-		email,
-		avatar_url,
-		created_at,
-		bio,
-		followers,
-		following,
-		public_repos,
-		location,
-		blog,
-		twitter_username,
-		company,
-		login,
-	} = data;
-
-	// update name element
-	if (name) {
-		nameElement!.textContent = name;
-		nameElement!.classList.remove('isDisabled');
-	} else {
-		nameElement!.textContent = login;
-		nameElement!.classList.remove('isDisabled');
-	}
-	nameElement.href = `https://github.com/${login}`;
-	// update avitar
-	avitarElement.src = avatar_url;
-	// update email
-	if (email) {
-		emailElement.classList.remove('isDisabled');
-		emailElement.textContent = email;
-		emailElement.href = email;
-	} else {
-		emailElement.textContent = `@${NOTAVAILABLE}`;
-		emailElement.classList.add('isDisabled');
-	}
-	// update join date
-	joinDateElement.textContent = `Joined ${new Date(created_at)
-		.toLocaleDateString('en-US', {
-			day: 'numeric',
-			month: 'short',
-			year: 'numeric',
-		})
-		.replace(',', '')}
-		`;
-
-	//update bio
-	if (bio) {
-		bioElement.textContent = bio;
-		nameElement!.classList.remove('isDisabled');
-	} else {
-		bioElement.textContent = NOTAVAILABLE;
-		bioElement.classList.add('isDisabled');
-	}
-
-	// update Stats
-	reposElement.textContent = `${public_repos}`;
-	reposElement.href = `https://github.com/${login}?tab=repositories`;
-	followersElement.textContent = `${followers}`;
-	followersElement.href = `https://github.com/${login}?tab=followers`;
-	followingElement.textContent = `${following}`;
-	followingElement.href = `https://github.com/${login}?tab=followings`;
-
-	// update location
-	if (location) {
-		locationElement.textContent = location;
-		locationElement.classList.remove('isDisabled');
-	} else {
-		locationElement.textContent = NOTAVAILABLE;
-		locationElement.classList.add('isDisabled');
-	}
-	if (blog) {
-		blogElement.textContent = blog;
-		blogElement.href = blog;
-		blogElement.classList.remove('isDisabled');
-	} else {
-		blogElement.textContent = NOTAVAILABLE;
-		blogElement.classList.add('isDisabled');
-	}
-	if (twitter_username) {
-		twitterElement.textContent = twitter_username;
-		twitterElement.classList.remove('isDisabled');
-		twitterElement.href = `https://twitter.com/${twitter_username}`;
-	} else {
-		twitterElement.textContent = NOTAVAILABLE;
-		twitterElement.classList.add('isDisabled');
-	}
-	if (company) {
-		companyElement.textContent = company;
-		companyElement.classList.remove('isDisabled');
-	} else {
-		companyElement.textContent = NOTAVAILABLE;
-		companyElement.classList.add('isDisabled');
-	}
-
-	// clear input
-	input.value = '';
 });
